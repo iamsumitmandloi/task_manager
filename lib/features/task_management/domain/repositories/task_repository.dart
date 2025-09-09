@@ -1,6 +1,6 @@
 import '../../data/models/task_model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
+/// Abstract repository interface for task data operations (CRUD, streaming).
 abstract class TaskRepository {
   Stream<List<TaskModel>> watchTasks();
   Future<void> addTask({required String title, String? description});

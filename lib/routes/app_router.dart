@@ -6,6 +6,7 @@ import 'package:task_manager/features/auth/presentation/cubit/auth_cubit.dart';
 
 part 'app_router.gr.dart';
 
+/// Route guard that redirects unauthenticated users to the auth page.
 class AuthGuard extends AutoRouteGuard {
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {

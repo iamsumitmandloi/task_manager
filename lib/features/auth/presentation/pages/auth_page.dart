@@ -28,13 +28,10 @@ class _AuthPageState extends State<AuthPage> {
     super.initState();
     final user = fb_auth.FirebaseAuth.instance.currentUser;
     if (user != null) {
-      debugPrint('[Auth] Existing user detected: ${user.uid} (${user.email})');
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.router.replace(const TaskListRoute());
       });
-    } else {
-      debugPrint('[Auth] No existing user. Staying on AuthPage');
-    }
+    } else {}
   }
 
   Future<void> _continue() async {
@@ -52,23 +49,16 @@ class _AuthPageState extends State<AuthPage> {
 
     setState(() => _isLoading = true);
     try {
-      debugPrint('[Auth] Attempting signInWithEmailAndPassword for $email');
       try {
         await fb_auth.FirebaseAuth.instance.signInWithEmailAndPassword(
           email: email,
           password: password,
         );
-        debugPrint('[Auth] Sign-in successful for $email');
       } on fb_auth.FirebaseAuthException catch (e) {
-        debugPrint(
-          '[Auth] Sign-in failed: code=${e.code}, message=${e.message}',
-        );
         if (e.code == 'user-not-found') {
-          debugPrint('[Auth] User not found. Creating account for $email');
-          final cred = await fb_auth.FirebaseAuth.instance
-              .createUserWithEmailAndPassword(email: email, password: password);
-          debugPrint(
-            '[Auth] Account created: uid=${cred.user?.uid} email=${cred.user?.email}',
+          await fb_auth.FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: email,
+            password: password,
           );
         } else if (e.code == 'wrong-password') {
           _showSnack('Wrong password');

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../domain/repositories/task_repository.dart';
 import '../../data/models/task_model.dart';
 
+/// State class for task list management containing loading state, tasks, and error.
 class TaskListState {
   final bool loading;
   final List<TaskModel> tasks;
@@ -27,6 +28,7 @@ class TaskListState {
       error = null;
 }
 
+/// Cubit for managing task list state and operations (CRUD, filtering).
 class TaskListCubit extends Cubit<TaskListState> {
   final TaskRepository _repo;
   TaskListCubit(this._repo) : super(const TaskListState.initial());
