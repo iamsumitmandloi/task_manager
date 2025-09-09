@@ -69,14 +69,3 @@ lib/
 ├── routes/                         # AutoRoute config
 └── injection_container.dart        # Dependency injection
 ```
-
-## Known Limitations & Next Steps
-- **Web support**: Deferred due to Firebase Auth compatibility issues
-- **Offline sync**: Basic offline persistence only
-- **Search/Filter**: Only basic status filtering implemented
-- **Theming**: Default Material Design only
-- **Data validation**: Basic client-side only
-- **Error handling**: Simple toast messages; no retry mechanisms
-- **Testing**: Minimal test coverage
-
-
